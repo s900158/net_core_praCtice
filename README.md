@@ -1,1 +1,1 @@
-# net_core_pratice
+# net_core_praCtice
