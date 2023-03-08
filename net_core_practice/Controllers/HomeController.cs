@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using net_core_practice.Models;
+using net_core_practice.Services.Home;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,14 +13,17 @@ namespace net_core_practice.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IHomeService _homeService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IHomeService homeService)
         {
             _logger = logger;
+            _homeService = homeService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var redisData = await _homeService.GetRedisDataAsync();
             return View();
         }
 
